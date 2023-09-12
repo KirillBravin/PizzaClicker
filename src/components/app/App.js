@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       count: 0,
       doubleClickCounter: 0,
+      reset: false,
     };
   }
 
@@ -20,7 +21,11 @@ class App extends Component {
   };
 
   onResetCount = (count, doubleClickCounter) => {
-    this.setState({ count, doubleClickCounter });
+    this.setState({ count, doubleClickCounter, reset: true });
+  };
+
+  onReset = (reset) => {
+    this.setState({ reset });
   };
 
   onDoubleClick = (doubleClickCounter) => {
@@ -28,7 +33,7 @@ class App extends Component {
   };
 
   render() {
-    const { count, doubleClickCounter } = this.state;
+    const { count, doubleClickCounter, reset } = this.state;
 
     return (
       <div className="App">
@@ -40,8 +45,10 @@ class App extends Component {
           <PizzaSidebar
             count={count}
             doubleClickCounter={doubleClickCounter}
+            reset={reset}
             onDoubleClick={this.onDoubleClick}
             onClickCount={this.onClickCount}
+            onReset={this.onReset}
           />
         </aside>
         <main>

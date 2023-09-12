@@ -8,7 +8,8 @@ class PizzaSidebar extends Component {
     this.state = {
       count: null,
       doubleClickCounter: 0,
-      priceDoubleClick: 100,
+      priceDoubleClick: 10,
+      reset: false,
     };
   }
 
@@ -23,12 +24,23 @@ class PizzaSidebar extends Component {
         count: this.props.count,
       });
     }
+    if (this.props.reset) {
+      this.setState(
+        {
+          priceDoubleClick: 10,
+        },
+        () => {
+          this.props.onReset(this.state.reset);
+        }
+      );
+    }
   }
 
   onDoubleClick = () => {
     let tempCount = this.state.count;
     let tempPriceDoubleclick = this.state.priceDoubleClick;
     tempCount = tempCount - tempPriceDoubleclick;
+
     if (this.state.count >= this.state.priceDoubleClick) {
       this.setState(
         {
@@ -45,7 +57,7 @@ class PizzaSidebar extends Component {
   };
 
   render() {
-    const { count, priceDoubleClick } = this.state;
+    const { priceDoubleClick } = this.state;
 
     return (
       <div className="side-bar">
@@ -61,29 +73,3 @@ class PizzaSidebar extends Component {
 }
 
 export default PizzaSidebar;
-
-/* onCount = () => {
-  if (this.props.count === this.state.count) {
-    this.setState(
-      {
-        count: this.state.count + 1 + this.props.doubleClickCounter,
-      },
-      () => {
-        this.props.onClickCount(this.state.count);
-      }
-    );
-  } else if (this.props.count < this.state.count && this.props.count > 0) {
-    this.setState({
-      count: this.props.count + 1 + this.props.doubleClickCounter,
-    });
-  } else {
-    this.setState(
-      {
-        count: 1,
-      },
-      () => {
-        this.props.onClickCount(this.state.count);
-      }
-    );
-  }
-}; */
