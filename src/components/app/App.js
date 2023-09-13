@@ -38,9 +38,9 @@ class App extends Component {
     return (
       <div className="App">
         <link rel="icon" href={Logo} />
-        <nav>
+        <header>
           <NavButtons onResetCount={this.onResetCount} />
-        </nav>
+        </header>
         <aside>
           <PizzaSidebar
             count={count}
